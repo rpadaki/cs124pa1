@@ -1,3 +1,4 @@
+package cs124pa1;
 import Java.util.*;
 
 public class Edge {
@@ -18,14 +19,14 @@ public class Edge {
 	}
 
 	public int getv1() {
-		return vertex1;
+		return this.vertex1;
 	}
 
 	public int getv2() {
-		return vertex2;
+		return this.vertex2;
 	}
 
 	public int getweight() {
-		return weight;
+		return this.weight;
 	}
 }
