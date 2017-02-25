@@ -1,4 +1,3 @@
-package cs124pa1;
 import Java.util.*;
 
 public class Edge {

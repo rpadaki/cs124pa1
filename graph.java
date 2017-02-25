@@ -1,4 +1,4 @@
-package cs124pa1;
+import edge;
 import Java.util.*;
 
 public class Graph {
