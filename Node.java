@@ -2,17 +2,17 @@ import java.util.*;
 
 public class Node {
 	private int rank;
-	private Edge e;
+	private int v;
 	private Node p;
 
-	public Node(Edge edge) {
+	public Node(int vertex) {
 		this.p = this;
-		this.e = edge;
+		this.v = vertex;
 		this.rank = 0;
 	}
 
-	public edge getedge() {
-		return this.edge;
+	public edge getvertex() {
+		return this.v;
 	}
 
 	public Node getp() {

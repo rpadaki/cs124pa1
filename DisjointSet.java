@@ -3,22 +3,26 @@ import java.util.*
 public class DisjointSet {
 	private ArrayList<Node> nodes;
 
-	public void makeset(Edge e) {
-		this.nodes.add(new Node(e));
+	public DisjointSet() {
+		nodes = new ArrayList<Node>(0);
 	}
 
-	public Node getnode(Edge e) {
+	public void makeset(int v) {
+		this.nodes.add(new Node(v));
+	}
+
+	public Node getnode(int v) {
 		for (Node n in nodes) {
-			if (n.getedge().getv1() == e.getv1() && n.getEdge().getv2() == e.getv2()) {
+			if (n.getvertex() == v) {
 				return n;
 			}
 			return null;
 		}
 	}
-	public Node find(Edge e) {
-		Node n = this.getnode(e);
+	public Node find(int v) {
+		Node n = this.getnode(v);
 		if (n != n.getp()) {
-			n.setp(find(n.getp().getedge()));
+			n.setp(find(n.getp().getvertex()));
 		}
 		return n.getp();
 	}
@@ -35,7 +39,7 @@ public class DisjointSet {
 		}
 	}
 
-	public void union(Edge e, Edge f) {
-		this.link(this.getnode(e), this.getnode(f));
+	public void union(int u, int v) {
+		this.link(this.getnode(u), this.getnode(v));
 	}
 }
