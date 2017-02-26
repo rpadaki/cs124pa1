@@ -36,6 +36,7 @@ public class Graph {
 
 	private ArrayList<Edge> sort() {
 		Collections.sort(this.edges);
+		return this.edges;
 	}
 
 	private ArrayList<Edge> merge(ArrayList<Edge> s, ArrayList<Edge> t) {
