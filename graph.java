@@ -1,5 +1,4 @@
-import edge;
-import Java.util.*;
+import java.util.*;
 
 public class Graph {
 	private int vertices;

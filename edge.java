@@ -1,8 +1,8 @@
-import Java.util.*;
+import java.util.*;
 
 public class Edge {
 	private int vertex1;
-	private int vertex;
+	private int vertex2;
 	private float weight;
 
 	public Edge(int v1, int v2, float w) {
@@ -25,7 +25,7 @@ public class Edge {
 		return this.vertex2;
 	}
 
-	public int getweight() {
+	public float getweight() {
 		return this.weight;
 	}
 }
