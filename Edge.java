@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Edge {
+public class Edge implements Comparable<Edge> {
 	private int vertex1;
 	private int vertex2;
 	private double weight;
@@ -15,6 +15,18 @@ public class Edge {
 			this.vertex2 = v2;	
 		}
 		this.weight = w;
+	}
+
+	public int compareTo(Edge e) {
+		if (weight == e.weight) {
+			return 0;
+		}
+		else if (weight > e.weight) {
+			return 1;
+		}
+		else {
+			return -1;
+		}
 	}
 
 	public int getv1() {

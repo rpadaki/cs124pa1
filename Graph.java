@@ -34,6 +34,10 @@ public class Graph {
 		return out;
 	}
 
+	private ArrayList<Edge> sort() {
+		Collections.sort(this.edges);
+	}
+
 	private ArrayList<Edge> merge(ArrayList<Edge> s, ArrayList<Edge> t) {
 		Edge u;
 		ArrayList<Edge> out = new ArrayList<Edge>(s.size() + t.size());
@@ -82,7 +86,8 @@ public class Graph {
 
 	public ArrayList<Edge> getmst() {
 		ArrayList<Edge> x = new ArrayList<Edge>(0);
-		this.mergesort();
+		this.sort();
+		//this.mergesort();
 		DisjointSet ds = new DisjointSet();
 		for (int u = 0; u < this.vertices; u++) {
 			ds.makeset(u);
