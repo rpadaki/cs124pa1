@@ -1,4 +1,4 @@
-import Java.util.*;
+import java.util.*;
 
 public class Edge {
 	private int vertex1;
