@@ -2,7 +2,7 @@ import java.util.*;
 
 public class MakeRandomGraphs {
 	public static void main(String args[]) {
-		Graph g = makeRandomCube(100,15);
+		Graph g = makeRandomCube(65536,4);
 		float totalweight = 0;
 		for (Edge e: g.getedges()) {
 			totalweight += e.getweight();
