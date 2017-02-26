@@ -1,4 +1,4 @@
-import java.util.*
+import java.util.*;
 
 public class DisjointSet {
 	private ArrayList<Node> nodes;
@@ -12,12 +12,12 @@ public class DisjointSet {
 	}
 
 	public Node getnode(int v) {
-		for (Node n in nodes) {
+		for (Node n : nodes) {
 			if (n.getvertex() == v) {
 				return n;
 			}
-			return null;
 		}
+		return null;
 	}
 	public Node find(int v) {
 		Node n = this.getnode(v);
@@ -40,6 +40,6 @@ public class DisjointSet {
 	}
 
 	public void union(int u, int v) {
-		this.link(this.getnode(u), this.getnode(v));
+		this.link(this.find(u), this.find(v));
 	}
 }

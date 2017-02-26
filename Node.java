@@ -6,12 +6,12 @@ public class Node {
 	private Node p;
 
 	public Node(int vertex) {
-		this.p = this;
-		this.v = vertex;
-		this.rank = 0;
+		v = vertex;
+		rank = 0;
+		p = this;
 	}
 
-	public edge getvertex() {
+	public int getvertex() {
 		return this.v;
 	}
 
