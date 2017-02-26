@@ -78,7 +78,8 @@ public class MakeRandomGraphs {
 			}
 			return new Graph(n, a, totalweight);
 		}
-		double maxweight = 2.0*(0.007*Math.pow(n,2) + 1.9861*n - 5)/(Math.pow(n,2)+n);
+		//double maxweight = 2.0*(0.007*Math.pow(n,2) + 1.9861*n - 5)/(Math.pow(n,2)+n);
+		double maxweight = 1.0/n;
 		for (int i = 0; i < n; i++) {
 			if (i/1000 > (i-1)/1000) System.out.println(i);
 			for (int j = i+1; j < n; j++) {
