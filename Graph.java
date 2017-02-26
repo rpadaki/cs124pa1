@@ -35,13 +35,15 @@ public class Graph {
 		if (t.isEmpty()) {
 			return s;
 		}
-		if (s.get(0)<=t.get(0)) {
+		if (s.get(0).getweight()<=t.get(0).getweight()) {
 			u = s.remove(0);
 		}
 		else {
 			u = t.remove(0);
 		}
-		return merge(s,t).add(0,u);
+		ArrayList<Edge> out = merge(s,t);
+		out.add(0,u);
+		return out;
 	}
 
 	private void mergesort() {
@@ -58,7 +60,7 @@ public class Graph {
 			q.add(this.merge(u,v));
 		}
 		if (q.isEmpty()) {
-			edges = ArrayList<Edge>(0);
+			edges = new ArrayList<Edge>(0);
 		}
 		else {
 			edges = q.get(0);
@@ -66,14 +68,14 @@ public class Graph {
 	}
 
 	public ArrayList<Edge> getmst() {
-		ArrayList<Edge> x = new ArrayList<Edge>();
+		ArrayList<Edge> x = new ArrayList<Edge>(0);
 		this.mergesort();
 		DisjointSet ds = new DisjointSet();
 		for (int u = 0; u < this.vertices; u++) {
 			ds.makeset(u);
 		}
 		for (Edge e : edges) {
-			if (ds.find(e.getv1()) != ds.find(e.getv2())) {
+			if (ds.find(e.getv1()).getvertex() != ds.find(e.getv2()).getvertex()) {
 				x.add(e);
 				ds.union(e.getv1(), e.getv2());
 			}
