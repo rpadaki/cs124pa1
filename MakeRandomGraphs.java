@@ -85,11 +85,13 @@ public class MakeRandomGraphs {
 		ArrayList<Edge> a = new ArrayList<Edge>();
 		double weight;
 		double totalweight = 0;
+		double maxweight;
 		// We did not expect edges of weight
 		// greater than this function k(n)
-		// to appear in our graph, based
-		// on empirical data for smaller n.
-		double maxweight = 0.7072/Math.pow(n, 0.693);
+		// to appear in our graph, when n
+		// is sufficiently large.
+		if (n < 2000) maxweight = 1;
+		else maxweight = 0.7072/Math.pow(n, 0.693);
 		for (int i = 0; i < n; i++) {
 			for (int j = i+1; j < n; j++) {
 				weight = rng.nextDouble();
@@ -113,18 +115,20 @@ public class MakeRandomGraphs {
 		for (int i = 0; i < n; i++) {
 			vlist[i] = new Vertex(d);
 		}
+		double maxweight;
 		// We did not expect edges of weight
 		// greater than this function k(n,d)
-		// to appear in our graph, based on
-		// empirical data for smaller n.
-		double maxweight = Math.pow(n, -0.77/d);
+		// to appear in our graph for
+		// sufficiently large n.
+		if (n < 2000) maxweight = Math.sqrt(d);
+		else maxweight = Math.pow(n, -0.77/d);
 		double weight;
 		double totalweight = 0;
 		for (int i = 0; i < n; i++) {
 			for (int j = i+1; j < n; j++) {
 				weight = vlist[i].distance(vlist[j]);
 				totalweight += weight;
-				if (weight < maxweight) {
+				if (weight <= maxweight) {
 					a.add(new Edge(i,j,weight));
 				}
 			}
