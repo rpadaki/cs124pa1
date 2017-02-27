@@ -7,7 +7,7 @@ public class MakeRandomGraphs {
 		// System.out.println(g.getedges().size());
 		for (int d = 2; d < 5; d++) {
 			System.out.println("\nDIMENISION " + d);
-			for (int i = 2; i < 50; i++) {
+			for (int i = 2; i < 150; i++) {
 				double totalMax = 0;
 				for (int j = 0; j < 5; j++) {
 					Graph g = makeRandomCube(i,d);
