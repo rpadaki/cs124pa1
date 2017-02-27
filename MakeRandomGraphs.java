@@ -16,9 +16,9 @@ public class MakeRandomGraphs {
 		// 		System.out.println(i + "\t" + totalMax/5.0);
 		// 	}
 		// }
-		for (int d = 3; d < 5; d++) {
+		for (int d = 2; d < 5; d++) {
 			System.out.println("\nDIMENISION " + d);
-			for (int i = 128; i < 131073; i = i * 2) {
+			for (int i = 65536; i < 131073; i = i * 2) {
 			//	double totalMax = 0;
 				double totweight = 0;
 				for (int j = 0; j < 5; j++) {
