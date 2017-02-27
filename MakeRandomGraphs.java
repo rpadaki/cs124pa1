@@ -1,6 +1,10 @@
+// HUIDS: 21130176 and 31238714
+// Our main file, where we take input, construct graphs, and
+// return output as per the problem specifications.
 import java.util.*;
 
 public class MakeRandomGraphs {
+	// Making sure final program format is correct.
 	public static void main(String args[]) {
 		try {
 			int flag = Integer.parseInt(args[0]);
@@ -8,38 +12,24 @@ public class MakeRandomGraphs {
 			int numtrials = Integer.parseInt(args[2]);
 			int dimension = Integer.parseInt(args[3]);
 
-			if (flag != 2) {
-				double totweight = 0;
-				for (int i = 0; i < numtrials; i++) {
-					Graph g = null;
-					if (dimension == 0) g = makeRandomEdges(numpoints);
-					else if (dimension > 0) g = makeRandomCube(numpoints, dimension);
-					else {
-						System.out.println("Error: Invalid Arguments.");
-						System.exit(0);
-					}
-					if (flag == 0) totweight += weight(g.getmst());
-					else if (flag == 1) totweight += maxweight(g.getmst());
+			// Standard output.
+			// Flag 0 (or anything, really) looks
+			// at total MST weight.
+			// Flag 1 looks at the maximum edge
+			// weight within the mst.
+			double totweight = 0;
+			for (int i = 0; i < numtrials; i++) {
+				Graph g = null;
+				if (dimension == 0) g = makeRandomEdges(numpoints);
+				else if (dimension > 0) g = makeRandomCube(numpoints, dimension);
+				else {
+					System.out.println("Error: Invalid Arguments.");
+					System.exit(0);
 				}
-				System.out.println(totweight/numtrials + " " + numpoints + " " + numtrials + " " + dimension);
+				if (flag != 1) totweight += weight(g.getmst());
+				else if (flag == 1) totweight += maxweight(g.getmst());
 			}
-
-			if (flag == 2) {
-				for (int d = 2; d < 5; d++) {
-					System.out.println("\nDIMENISION " + d);
-					for (int i = 65536; i < 131073; i = i * 2) {
-					//	double totalMax = 0;
-						double totweight = 0;
-						for (int j = 0; j < 5; j++) {
-							Graph g = makeRandomCube(i,d);
-							totweight += weight(g.getmst()) / (i);
-							//totalMax += maxweight(g.getmst());
-						}
-						System.out.println(i + "\tAverage MST Weight:\t" + totweight / 5.0);
-						//System.out.println((1000*i)+ " " + totalMax/5.0 + " k = " + (0.7072/Math.pow(1000*i, 0.693)));
-					}
-				}
-			}
+			System.out.println(totweight/numtrials + " " + numpoints + " " + numtrials + " " + dimension);
 		}
 		catch (NumberFormatException e) {
 			System.out.println("Error: Invalid Arguments.");
@@ -47,6 +37,7 @@ public class MakeRandomGraphs {
 		}
 	}
 
+	// Given a list of edges, find the maximum weight.
 	public static double maxweight(ArrayList<Edge> edges) {
 		double out = Integer.MIN_VALUE;
 		for (Edge e : edges) {
@@ -57,6 +48,7 @@ public class MakeRandomGraphs {
 		return out;
 	}
 
+	// Given a list of edges, find the total weight.
 	public static double weight(ArrayList<Edge> edges) {
 		double total = 0;
 		for (Edge e : edges) {
@@ -65,6 +57,8 @@ public class MakeRandomGraphs {
 		return total;
 	}
 
+	// We tested our implementation of Kruskal's
+	// on a simple example graph.
 	public static Graph makeTestGraph() {
 		ArrayList<Edge> a = new ArrayList<Edge>(12);
 		a.add(new Edge(0,1,1));
@@ -82,32 +76,25 @@ public class MakeRandomGraphs {
 		return new Graph(9, a, 44);
 	}
 
-	// public static void insert(ArrayList<Edge> a, Edge e) {
-	// 	int i = 0;
-	// 	for (Edge f : a) {
-	// 		if (f.getweight()>e.getweight()) {
-	// 			break;
-	// 		}
-	// 		i++;
-	// 	}
-	// 	a.add(i,e);
-	// }
 
+	// This is the first case, in which we
+	// generate edge weights uniformly at
+	// random in [0,1].
 	public static Graph makeRandomEdges(int n) {
 		Random rng = new Random();
 		ArrayList<Edge> a = new ArrayList<Edge>();
 		double weight;
 		double totalweight = 0;
-
-		//double maxweight = 2.0*(0.007*Math.pow(n,2) + 1.9861*n - 5)/(Math.pow(n,2)+n);
+		// We did not expect edges of weight
+		// greater than this function k(n)
+		// to appear in our graph, based
+		// on empirical data for smaller n.
 		double maxweight = 0.7072/Math.pow(n, 0.693);
 		for (int i = 0; i < n; i++) {
-		//	if (i/1000 > (i-1)/1000) System.out.println(i);
 			for (int j = i+1; j < n; j++) {
 				weight = rng.nextDouble();
 				totalweight += weight;
 				if (weight <= maxweight) {
-					// insert(a,new Edge(i,j,weight));
 					a.add(new Edge(i,j,weight));
 				}
 			}
@@ -115,12 +102,21 @@ public class MakeRandomGraphs {
 		return new Graph(n, a, totalweight);
 	}
 
+	// This is the second case, in which we
+	// generate edges weights as Euclidean
+	// distances between points picked
+	// uniformly at random in the unit
+	// d-hypercube.
 	public static Graph makeRandomCube(int n, int d) {
 		Vertex[] vlist = new Vertex[n];
 		ArrayList<Edge> a = new ArrayList<Edge>();
 		for (int i = 0; i < n; i++) {
 			vlist[i] = new Vertex(d);
 		}
+		// We did not expect edges of weight
+		// greater than this function k(n,d)
+		// to appear in our graph, based on
+		// empirical data for smaller n.
 		double maxweight = Math.pow(n, -0.77/d);
 		double weight;
 		double totalweight = 0;
