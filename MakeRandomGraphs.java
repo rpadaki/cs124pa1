@@ -11,7 +11,7 @@ public class MakeRandomGraphs {
 		//	double totalMax = 0;
 			double totweight = 0;
 			for (int j = 0; j < 5; j++) {
-				Graph g = makeRandomEdges(i);
+				Graph g = makeRandomCube(i,4);
 				totweight += weight(g.getmst()) / (i);
 				//totalMax += maxweight(g.getmst());
 			}
@@ -88,24 +88,24 @@ public class MakeRandomGraphs {
 		return new Graph(n, a, totalweight);
 	}
 
-	// public static Graph makeRandomCube(int n, int d) {
-	// 	Vertex[] vlist = new Vertex[n];
-	// 	ArrayList<Edge> a = new ArrayList<Edge>();
-	// 	for (int i = 0; i < n; i++) {
-	// 		vlist[i] = new Vertex(d);
-	// 	}
-	// 	double weight;
-	// 	double totalweight = 0;
-	// 	for (int i = 0; i < n; i++) {
-	// 		if (i/1000 > (i-1)/1000) System.out.println(i);
-	// 		for (int j = i+1; j < n; j++) {
-	// 			weight = vlist[i].distance(vlist[j]);
-	// 			totalweight += weight;
-	// 			if (weight <= Math.sqrt(d)*Math.pow(2.0, 0.5 - Math.log(n))) {
-	// 				insert(a,new Edge(i,j,weight));
-	// 			}
-	// 		}
-	// 	}
-	// 	return new Graph(n, a, totalweight);
-	// }
+	public static Graph makeRandomCube(int n, int d) {
+		Vertex[] vlist = new Vertex[n];
+		ArrayList<Edge> a = new ArrayList<Edge>();
+		for (int i = 0; i < n; i++) {
+			vlist[i] = new Vertex(d);
+		}
+		double maxweight = Math.sqrt(d)*0.7072/Math.pow(n, 0.693);
+		double weight;
+		double totalweight = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = i+1; j < n; j++) {
+				weight = vlist[i].distance(vlist[j]);
+				totalweight += weight;
+				if (weight < maxweight) {
+					insert(a,new Edge(i,j,weight));
+				}
+			}
+		}
+		return new Graph(n, a, totalweight);
+	}
 }
