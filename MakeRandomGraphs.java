@@ -11,7 +11,7 @@ public class MakeRandomGraphs {
 			if (flag == 0) {
 				double totweight = 0;
 				for (int i = 0; i < numtrials; i++) {
-					Graph g;
+					Graph g = null;
 					if (dimension == 0) g = makeRandomEdges(numpoints);
 					else if (dimension > 0) g = makeRandomCube(numpoints, dimension);
 					else {
