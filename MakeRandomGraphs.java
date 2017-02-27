@@ -5,29 +5,31 @@ public class MakeRandomGraphs {
 		// Graph g = makeRandomEdges(65536);
 		// System.out.println("Graph weight: " + g.gettotalweight());
 		// System.out.println(g.getedges().size());
+		// for (int d = 2; d < 5; d++) {
+		// 	System.out.println("\nDIMENISION " + d);
+		// 	for (int i = 2; i < 150; i++) {
+		// 		double totalMax = 0;
+		// 		for (int j = 0; j < 5; j++) {
+		// 			Graph g = makeRandomCube(i,d);
+		// 			totalMax += maxweight(g.getmst());
+		// 		}
+		// 		System.out.println(i + "\t" + totalMax/5.0);
+		// 	}
+		// }
 		for (int d = 2; d < 5; d++) {
-			System.out.println("\nDIMENISION " + d);
-			for (int i = 2; i < 150; i++) {
-				double totalMax = 0;
+			for (int i = 128; i < 131073; i = i * 2) {
+			//	double totalMax = 0;
+				double totweight = 0;
+				System.out.println("\nDIMENISION " + d);
 				for (int j = 0; j < 5; j++) {
 					Graph g = makeRandomCube(i,d);
-					totalMax += maxweight(g.getmst());
+					totweight += weight(g.getmst()) / (i);
+					//totalMax += maxweight(g.getmst());
 				}
-				System.out.println(i + "\t" + totalMax/5.0);
+				System.out.println(i + "\tAverage MST Weight:\t" + totweight / 5.0);
+				//System.out.println((1000*i)+ " " + totalMax/5.0 + " k = " + (0.7072/Math.pow(1000*i, 0.693)));
 			}
 		}
-
-		// for (int i = 128; i < 131073; i = i * 2) {
-		// //	double totalMax = 0;
-		// 	double totweight = 0;
-		// 	for (int j = 0; j < 5; j++) {
-		// 		Graph g = makeRandomCube(i,4);
-		// 		totweight += weight(g.getmst()) / (i);
-		// 		//totalMax += maxweight(g.getmst());
-		// 	}
-		// 	System.out.println(i + "\tAverage MST Weight:\t" + totweight / 5.0);
-		// 	//System.out.println((1000*i)+ " " + totalMax/5.0 + " k = " + (0.7072/Math.pow(1000*i, 0.693)));
-		// }
 	}
 
 	public static double maxweight(ArrayList<Edge> edges) {
@@ -104,7 +106,7 @@ public class MakeRandomGraphs {
 		for (int i = 0; i < n; i++) {
 			vlist[i] = new Vertex(d);
 		}
-		double maxweight = Math.sqrt(d);//*0.7072/Math.pow(n, 0.693);
+		double maxweight = Math.pow(n, -0.77/d);
 		double weight;
 		double totalweight = 0;
 		for (int i = 0; i < n; i++) {
