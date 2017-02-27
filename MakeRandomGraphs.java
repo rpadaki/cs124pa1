@@ -90,7 +90,7 @@ public class MakeRandomGraphs {
 		// greater than this function k(n)
 		// to appear in our graph, when n
 		// is sufficiently large.
-		if (n < 2000) maxweight = 1;
+		if (n < 1000) maxweight = 1;
 		else maxweight = 0.7072/Math.pow(n, 0.693);
 		for (int i = 0; i < n; i++) {
 			for (int j = i+1; j < n; j++) {
@@ -120,7 +120,7 @@ public class MakeRandomGraphs {
 		// greater than this function k(n,d)
 		// to appear in our graph for
 		// sufficiently large n.
-		if (n < 2000) maxweight = Math.sqrt(d);
+		if (n < 1000) maxweight = Math.sqrt(d);
 		else maxweight = Math.pow(n, -0.77/d);
 		double weight;
 		double totalweight = 0;
