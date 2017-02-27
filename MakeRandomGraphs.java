@@ -67,16 +67,14 @@ public class MakeRandomGraphs {
 		Random rng = new Random();
 		ArrayList<Edge> a = new ArrayList<Edge>();
 		double weight;
-		double totalweight = 0;
-		if (n < 8) {
-			for (int i = 0; i < n; i++) {
-				for (int j = i+1; j < n; j++) {
-					weight = rng.nextDouble();
-					totalweight += weight;
-					a.add(new Edge(i,j,weight));
-				}
+		double totalweight = 0;\
+		for (int i = 0; i < n; i++) {
+			for (int j = i+1; j < n; j++) {
+				weight = rng.nextDouble();
+				totalweight += weight;
+				a.add(new Edge(i,j,weight));
 			}
-			return new Graph(n, a, totalweight);
+		return new Graph(n, a, totalweight);
 		}
 		//double maxweight = 2.0*(0.007*Math.pow(n,2) + 1.9861*n - 5)/(Math.pow(n,2)+n);
 		double maxweight = 1.0/n;
