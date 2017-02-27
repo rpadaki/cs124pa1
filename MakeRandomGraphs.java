@@ -16,7 +16,7 @@ public class MakeRandomGraphs {
 					else if (dimension > 0) g = makeRandomCube(numpoints, dimension);
 					else {
 						System.out.println("Error: Invalid Arguments.");
-						System.exit();
+						System.exit(0);
 					}
 					totweight += weight(g.getmst());
 				}
@@ -55,7 +55,7 @@ public class MakeRandomGraphs {
 		}
 		catch (NumberFormatException e) {
 			System.out.println("Error: Invalid Arguments.");
-			System.exit();
+			System.exit(0);
 		}
 	}
 
