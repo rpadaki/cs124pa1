@@ -67,7 +67,7 @@ public class MakeRandomGraphs {
 		Random rng = new Random();
 		ArrayList<Edge> a = new ArrayList<Edge>();
 		double weight;
-		double totalweight = 0;\
+		double totalweight = 0;
 		for (int i = 0; i < n; i++) {
 			for (int j = i+1; j < n; j++) {
 				weight = rng.nextDouble();
