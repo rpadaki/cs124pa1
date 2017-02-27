@@ -17,10 +17,10 @@ public class MakeRandomGraphs {
 		// 	}
 		// }
 		for (int d = 2; d < 5; d++) {
+			System.out.println("\nDIMENISION " + d);
 			for (int i = 128; i < 131073; i = i * 2) {
 			//	double totalMax = 0;
 				double totweight = 0;
-				System.out.println("\nDIMENISION " + d);
 				for (int j = 0; j < 5; j++) {
 					Graph g = makeRandomCube(i,d);
 					totweight += weight(g.getmst()) / (i);
