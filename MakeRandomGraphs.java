@@ -102,7 +102,7 @@ public class MakeRandomGraphs {
 				weight = vlist[i].distance(vlist[j]);
 				totalweight += weight;
 				if (weight < maxweight) {
-					insert(a,new Edge(i,j,weight));
+					a.add(new Edge(i,j,weight));
 				}
 			}
 		}
