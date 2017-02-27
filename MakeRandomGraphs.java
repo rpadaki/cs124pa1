@@ -8,7 +8,7 @@ public class MakeRandomGraphs {
 			int numtrials = Integer.parseInt(args[2]);
 			int dimension = Integer.parseInt(args[3]);
 
-			if (flag == 0) {
+			if (flag != 2) {
 				double totweight = 0;
 				for (int i = 0; i < numtrials; i++) {
 					Graph g = null;
@@ -18,25 +18,13 @@ public class MakeRandomGraphs {
 						System.out.println("Error: Invalid Arguments.");
 						System.exit(0);
 					}
-					totweight += weight(g.getmst());
+					if (flag == 0) totweight += weight(g.getmst());
+					else if (flag == 1) totweight += maxweight(g.getmst());
 				}
 				System.out.println(totweight/numtrials + " " + numpoints + " " + numtrials + " " + dimension);
 			}
-			// Graph g = makeRandomEdges(65536);
-			// System.out.println("Graph weight: " + g.gettotalweight());
-			// System.out.println(g.getedges().size());
-			// for (int d = 2; d < 5; d++) {
-			// 	System.out.println("\nDIMENISION " + d);
-			// 	for (int i = 2; i < 150; i++) {
-			// 		double totalMax = 0;
-			// 		for (int j = 0; j < 5; j++) {
-			// 			Graph g = makeRandomCube(i,d);
-			// 			totalMax += maxweight(g.getmst());
-			// 		}
-			// 		System.out.println(i + "\t" + totalMax/5.0);
-			// 	}
-			// }
-			if (flag == 1) {
+
+			if (flag == 2) {
 				for (int d = 2; d < 5; d++) {
 					System.out.println("\nDIMENISION " + d);
 					for (int i = 65536; i < 131073; i = i * 2) {
