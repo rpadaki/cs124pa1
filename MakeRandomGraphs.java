@@ -5,15 +5,18 @@ public class MakeRandomGraphs {
 		// Graph g = makeRandomEdges(65536);
 		// System.out.println("Graph weight: " + g.gettotalweight());
 		// System.out.println(g.getedges().size());
-		// System.out.println("MST weight: " + weight(g.getmst()));
+		 
 
-		for (int i = 1; i < 40; i++) {
-			double totalMax = 0;
-			for (int j = 0; j < 3; j++) {
-				Graph g = makeRandomEdges(1000*i);
-				totalMax += maxweight(g.getmst());
+		for (int i = 128; i < 131073; i = i * 2) {
+		//	double totalMax = 0;
+			double totweight = 0;
+			for (int j = 0; j < 5; j++) {
+				Graph g = makeRandomEdges(i);
+				totweight += weight(g.getmst()) / (i);
+				//totalMax += maxweight(g.getmst());
 			}
-			System.out.println((1000*i)+ " " + totalMax/3.0 + " k = " + (2*(0.007*Math.pow(1000*i,2) + 1.9861*1000*i - 5)/(Math.pow(1000*i,2)+100*i)));
+			System.out.println(i + "\tAverage MST Weight:\t" + totweight / 5.0);
+			//System.out.println((1000*i)+ " " + totalMax/5.0 + " k = " + (0.7072/Math.pow(1000*i, 0.693)));
 		}
 	}
 
@@ -68,18 +71,11 @@ public class MakeRandomGraphs {
 		ArrayList<Edge> a = new ArrayList<Edge>();
 		double weight;
 		double totalweight = 0;
-		for (int i = 0; i < n; i++) {
-			for (int j = i+1; j < n; j++) {
-				weight = rng.nextDouble();
-				totalweight += weight;
-				a.add(new Edge(i,j,weight));
-			}
-		return new Graph(n, a, totalweight);
-		}
+
 		//double maxweight = 2.0*(0.007*Math.pow(n,2) + 1.9861*n - 5)/(Math.pow(n,2)+n);
-		double maxweight = 1.0/n;
+		double maxweight = 0.7072/Math.pow(n, 0.693);
 		for (int i = 0; i < n; i++) {
-			if (i/1000 > (i-1)/1000) System.out.println(i);
+		//	if (i/1000 > (i-1)/1000) System.out.println(i);
 			for (int j = i+1; j < n; j++) {
 				weight = rng.nextDouble();
 				totalweight += weight;
