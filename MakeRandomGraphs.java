@@ -2,33 +2,60 @@ import java.util.*;
 
 public class MakeRandomGraphs {
 	public static void main(String args[]) {
-		// Graph g = makeRandomEdges(65536);
-		// System.out.println("Graph weight: " + g.gettotalweight());
-		// System.out.println(g.getedges().size());
-		// for (int d = 2; d < 5; d++) {
-		// 	System.out.println("\nDIMENISION " + d);
-		// 	for (int i = 2; i < 150; i++) {
-		// 		double totalMax = 0;
-		// 		for (int j = 0; j < 5; j++) {
-		// 			Graph g = makeRandomCube(i,d);
-		// 			totalMax += maxweight(g.getmst());
-		// 		}
-		// 		System.out.println(i + "\t" + totalMax/5.0);
-		// 	}
-		// }
-		for (int d = 2; d < 5; d++) {
-			System.out.println("\nDIMENISION " + d);
-			for (int i = 65536; i < 131073; i = i * 2) {
-			//	double totalMax = 0;
+		try {
+			int flag = Integer.parseInt(args[0]);
+			int numpoints = Integer.parseInt(args[1]);
+			int numtrials = Integer.parseInt(args[2]);
+			int dimension = Integer.parseInt(args[3]);
+
+			if (flag == 0) {
 				double totweight = 0;
-				for (int j = 0; j < 5; j++) {
-					Graph g = makeRandomCube(i,d);
-					totweight += weight(g.getmst()) / (i);
-					//totalMax += maxweight(g.getmst());
+				for (int i = 0; i < numtrials; i++) {
+					Graph g;
+					if (dimension == 0) g = makeRandomEdges(numpoints);
+					else if (dimension > 0) g = makeRandomCube(numpoints, dimension);
+					else {
+						System.out.println("Error: Invalid Arguments.");
+						System.exit();
+					}
+					totweight += weight(g.getmst());
 				}
-				System.out.println(i + "\tAverage MST Weight:\t" + totweight / 5.0);
-				//System.out.println((1000*i)+ " " + totalMax/5.0 + " k = " + (0.7072/Math.pow(1000*i, 0.693)));
+				System.out.println(totweight/numtrials + " " + numpoints + " " + numtrials + " " + dimension);
 			}
+			// Graph g = makeRandomEdges(65536);
+			// System.out.println("Graph weight: " + g.gettotalweight());
+			// System.out.println(g.getedges().size());
+			// for (int d = 2; d < 5; d++) {
+			// 	System.out.println("\nDIMENISION " + d);
+			// 	for (int i = 2; i < 150; i++) {
+			// 		double totalMax = 0;
+			// 		for (int j = 0; j < 5; j++) {
+			// 			Graph g = makeRandomCube(i,d);
+			// 			totalMax += maxweight(g.getmst());
+			// 		}
+			// 		System.out.println(i + "\t" + totalMax/5.0);
+			// 	}
+			// }
+			if (flag == 1) {
+				for (int d = 2; d < 5; d++) {
+					System.out.println("\nDIMENISION " + d);
+					for (int i = 65536; i < 131073; i = i * 2) {
+					//	double totalMax = 0;
+						double totweight = 0;
+						for (int j = 0; j < 5; j++) {
+							Graph g = makeRandomCube(i,d);
+							totweight += weight(g.getmst()) / (i);
+							//totalMax += maxweight(g.getmst());
+						}
+						System.out.println(i + "\tAverage MST Weight:\t" + totweight / 5.0);
+						//System.out.println((1000*i)+ " " + totalMax/5.0 + " k = " + (0.7072/Math.pow(1000*i, 0.693)));
+					}
+				}
+			}
+		}
+		catch (NumberFormatException e) {
+			System.out.println("Error: Invalid Arguments.");
+			System.exit();
 		}
 	}
 

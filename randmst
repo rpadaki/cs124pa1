@@ -1,4 +1,4 @@
 #!/bin/bash
 javac MakeRandomGraphs.java
-java MakeRandomGraphs
+java MakeRandomGraphs $1 $2 $3 $4
 rm *.class
