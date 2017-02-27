@@ -1,4 +1,4 @@
 #!/bin/bash
-/home/r/o/rop356/CS 124/Programming Assignment 1/cs124pa1/MakeRandomGraphs.java
+javac MakeRandomGraphs.java
 java MakeRandomGraphs
-rm /home/r/o/rop356/CS 124/Programming Assignment 1/cs124pa1*.class
+rm *.class
